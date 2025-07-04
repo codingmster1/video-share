@@ -1,3 +1,4 @@
+import { ICONS } from '@/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -22,7 +23,15 @@ const Header = ({subHeader, title, userImg}: SharedHeaderProps) => {
     <Link href="/upload">
     <Image src="/assets/icons/upload.svg" alt="upload"
     width={16} height={16} />
+    <span>Upload a Video</span>
     </Link>
+    <div className="record">
+    <button className="primary-btn">
+<Image src={ICONS.record} alt="record" width={16} height={16}/>
+<span>Record a Video</span>
+    </button>
+    </div>
+
 </aside>
     </section>
    </header>
