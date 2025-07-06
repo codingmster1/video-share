@@ -19,6 +19,17 @@ width={20} height={20} />
 </div>
 
         </div>
+
+{isOpen && (
+    <ul className="dropdown">
+{['Most recent', 'Most Liked'].map((option) => (
+    <li key={option} className="list-item">
+{option}
+    </li>
+))}
+    </ul>
+)}
+
         </div>
   )
 }
