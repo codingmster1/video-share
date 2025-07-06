@@ -12,7 +12,10 @@ const DropdownList = () => {
 <figure>
     <Image src="/assets/icons/hamburger.svg" alt="menu"
     width={14} height={14} />
+    Most Recent
 </figure>
+<Image src="/assets/icons/arrow-down.svg" alt="arrow-down"
+width={20} height={20} />
 </div>
 
         </div>
