@@ -4,10 +4,11 @@ import React from 'react'
 const page = async({params}: ParamsWithSearch) => {
     const {id } = await params;
   return (
-    <div className="text-2xl font-karla">
+    <div className="wrapper page">
         <Header subHeader="doylejeff98@gmail.com" title="Jeff"
         userImg="/assets/images/dummy.jpg"/>
-        USER ID: {id}</div>
+        <h1 className="text-2xl font-karla">USER ID: {id}</h1>
+        </div>
   )
 }
 

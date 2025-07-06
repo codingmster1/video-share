@@ -2,6 +2,7 @@ import { ICONS } from '@/constants'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import DropdownList from './DropdownList'
 
 const Header = ({subHeader, title, userImg}: SharedHeaderProps) => {
   return (
@@ -9,7 +10,7 @@ const Header = ({subHeader, title, userImg}: SharedHeaderProps) => {
     <section className="header-container">
 <div className="details">
 {userImg && (
-    <Image src={userImg || '/assets/images/dummy.jpg'}
+    <Image src={userImg}
     alt="user" width={66} height={66} className="rounded-full"/>
 )}
 
@@ -43,7 +44,7 @@ placeholder="Search for videos, tags, and folders..."
 <Image src="/assets/icons/search.svg" alt="search" width={16}
 height={16}
 /></div>
-{/* <DropDownList /> */}
+ <DropdownList /> 
     </section>
    </header>
   )
