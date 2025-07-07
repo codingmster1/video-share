@@ -31,6 +31,7 @@ const page = () => {
     </article>
 </section>
 </div>
+<p> SnapCast {(new Date()).getFullYear()}</p>
       </aside>
     </main>
   )
