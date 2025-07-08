@@ -1,0 +1,6 @@
+{
+  "databaseURL": "https://Jeff-Doyle-s-workspace-tofkvt.us-east-1.xata.sh/db/snapcast",
+  "codegen": {
+    "output": "src/xata.ts"
+  }
+}
