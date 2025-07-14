@@ -41,6 +41,22 @@ as="textarea"
 placeholder="Description"
 />
 <FileInput/>
+
+<FileInput/>
+
+<FormField
+id="visibility"
+label="Visibility"
+value={formData.visibility}
+onChange={handleInputChange}
+as="select"
+options={[
+    {value: 'public', label: 'Public'},
+    {value: 'private', label: 'Private'},
+]}
+
+/>
+
         </form>
 
     </div>
