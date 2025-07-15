@@ -9,6 +9,10 @@ const page = () => {
         description: '',
         visibility: 'public',
     })
+
+
+    const video = {};
+    const thumbnail = {};
     const [error, setError] = useState(null)
 
     const handleInputChange = (e: ChangeEvent) => {
@@ -40,9 +44,29 @@ onChange={handleInputChange}
 as="textarea"
 placeholder="Description"
 />
-<FileInput/>
+<FileInput
+id="video"
+label="Video"
+accept="video/*"
+file={video.file}
+previewUrl={video.previewUrl}
+inputRef={video.inputRef}
+onChange={video.handleFileChange}
+onReset={video.resetFile}
+type="video"
+/>
 
-<FileInput/>
+<FileInput
+id="thumbnail"
+label="Thumbnail"
+accept="image/*"
+file={thumbnail.file}
+previewUrl={thumbnail.previewUrl}
+inputRef={thumbnail.inputRef}
+onChange={thumbnail.handleFileChange}
+onReset={thumbnail.resetFile}
+type="image"
+/>
 
 <FormField
 id="visibility"
