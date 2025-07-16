@@ -6,6 +6,8 @@ import { useFileInput } from '@/lib/hooks/useFileInput';
 import React, { ChangeEvent, useState } from 'react'
 
 const page = () => {
+
+    const [isSubmitting, setIsSubmitting] = useState(false)
     const [formData, setFormData] = useState({
         title: '',
         description: '',
@@ -82,7 +84,9 @@ options={[
 ]}
 
 />
-
+<button type="submit" disabled={isSubmitting} className="submit-button">
+    {isSubmitting ? 'Uploading...' : 'Upload Video'}
+</button>
         </form>
 
     </div>
