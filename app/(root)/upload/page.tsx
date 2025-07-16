@@ -17,7 +17,7 @@ const page = () => {
     const thumbnail = useFileInput(MAX_THUMBNAIL_SIZE)
     const [error, setError] = useState(null)
 
-    const handleInputChange = (e: ChangeEvent) => {
+    const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
 const {name, value } = e.target;
 
 setFormData((prevState) => ({ ...prevState, [name]: value}))
