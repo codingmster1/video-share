@@ -46,7 +46,9 @@ export const verification = pgTable("verification", {
  createdAt: timestamp('created_at').$defaultFn(() => /* @__PURE__ */ new Date()),
  updatedAt: timestamp('updated_at').$defaultFn(() => /* @__PURE__ */ new Date())
 				});
-                export const videos = pgTable("videos", {
+                
+                
+export const videos = pgTable("videos", {
                     id: uuid("id").primaryKey().defaultRandom().unique(),
                     title: text("title").notNull(),
                     description: text("description").notNull(),
@@ -63,6 +65,7 @@ export const verification = pgTable("verification", {
                     updatedAt: timestamp("updated_at").notNull().defaultNow(),
                   });
 
-                export const schema = {
+                  
+export const schema = {
                     user, account, session, verification
                 }
