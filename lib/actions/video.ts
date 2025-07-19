@@ -7,6 +7,7 @@ import { BUNNY } from "@/constants";
 import { videos } from "@/drizzle/schema";
 import { db } from "@/drizzle/db";
 import { revalidatePath } from "next/cache";
+import aj, { fixedWindow, request } from "../acrjet";
 
 const VIDEO_STREAM_BASE_URL = BUNNY.STREAM_BASE_URL;
 const THUMBNAIL_STORAGE_BASE_URL = BUNNY.STORAGE_BASE_URL;
@@ -30,6 +31,24 @@ const getSessionUserId = async (): Promise<string> => {
 const revalidatePaths = (paths: string[]) => {
 paths.forEach((path) => revalidatePath(path))
 }
+
+
+const validateWithArcjet = async (fingerPrint: string) => {
+    const rateLimit = aj.withRule(
+      fixedWindow({
+        mode: "LIVE",
+        window: "1m",
+        max: 2,
+        characteristics: ["fingerprint"],
+      })
+    );
+    const req = await request();
+    const decision = await rateLimit.protect(req, { fingerprint: fingerPrint });
+    if (decision.isDenied()) {
+      throw new Error("Rate Limit Exceeded");
+    }
+  };
+  
 
 
 export const getVideoUploadUrl = withErrorHandling(async () => {
@@ -72,7 +91,7 @@ return {
 
 export const saveVideoDetails = withErrorHandling( async(videoDetails: VideoDetails) => {
 const userId = await getSessionUserId()
-
+await validateWithArcjet(userId);
 await apiFetch(
      `${VIDEO_STREAM_BASE_URL}/${BUNNY_LIBRARY_ID}/videos/${videoDetails.videoId}`,
 {
@@ -89,11 +108,14 @@ await apiFetch(
 
 
     await db.insert(videos).values({
-        ...videoDetails,
+        title: videoDetails.title,
+        description: videoDetails.description,
         videoUrl: `${BUNNY.EMBED_URL}/${BUNNY_LIBRARY_ID}/${videoDetails.videoId}`,
+        videoId: videoDetails.videoId,
+        thumbnailUrl: videoDetails.thumbnailUrl,
+        visibility: videoDetails.visibility as "public" | "private",
         userId,
-        createdAt: new Date(),
-        updatedAt: new Date(),
+        duration: videoDetails.duration ?? null,
     })
 
     revalidatePaths(['/'])
