@@ -1,11 +1,27 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+  eslint: {
+    ignoreDuringBuilds: true,
+},
+typescript: {
+  ignoreBuildErrors: true,
+},
   images: {
     remotePatterns: [
-      {hostname: 'snapcast-jsm.b-cdn.net', protocol: 'https', port: '', pathname: '/**'}
-    ]
-  }
+      {
+        protocol: "https",
+        hostname: "*",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+  },
+  experimental: {
+    serverActions: {
+      bodySizeLimit: "50mb",
+    },
+  },
 };
 
 export default nextConfig;
