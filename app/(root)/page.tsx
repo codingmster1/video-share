@@ -17,7 +17,11 @@ const Page = async({searchParams}: SearchParams) => {
       
 {videos?.length > 0 ? (
   <section className="video-grid">
-    {videos[0].video.title}
+    {videos.map(({video, user}) => (
+<VideoCard key={video.id} {...video} thumbnail={video.thumbnailUrl} userImg={user?.image || ''}
+username={user?.name || 'Guest'} 
+/>
+    ))}
     </section>
 ) : (
   <EmptyState icon="/assets/icons/video.svg" description="No video found" title="Try adjusting your search"/>
